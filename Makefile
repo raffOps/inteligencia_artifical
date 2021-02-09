@@ -5,4 +5,4 @@ bash:
 	docker run -it -v ${PWD}:/ia ia bash
 
 test:
-	docker run -v ${PWD}:/ia ia pytest tests
+	docker run -v ${PWD}:/ia ia pytest src
