@@ -15,9 +15,13 @@ class BFS:
     def get_proximo_nodo(self):
         return self.fronteira.popleft()
 
-    def expande(self):
+    def acha_objetivo(self):
         while True:
             proximo_nodo = self.get_proximo_nodo()
+            #print(proximo_nodo.acao)
+            #print(proximo_nodo)
+            #print("*"*20)
+            #input()
             if not proximo_nodo:
                 raise Exception("Nao existe caminho")
             elif proximo_nodo == self.objetivo:
@@ -32,7 +36,7 @@ class BFS:
 
 if __name__ == "__main__":
     grafo = BFS("1234_5678")
-    caminho = grafo.expande()
+    caminho = grafo.acha_objetivo()
 
     for nodo in caminho:
         print(nodo.acao)

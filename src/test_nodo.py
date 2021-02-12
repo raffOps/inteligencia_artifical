@@ -38,3 +38,4 @@ def test_vai_pra_esquerda_012345_6(estado_12345_678):
 
 
 
+
