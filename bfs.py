@@ -1,5 +1,6 @@
 from nodo import Nodo
 from collections import deque
+import sys
 
 
 class BFS:
@@ -26,8 +27,8 @@ class BFS:
                 raise Exception("Nao existe caminho")
             elif proximo_nodo == self.objetivo:
                 return proximo_nodo.get_caminho()
-            elif proximo_nodo not in self.conhecidos:
-                self.conhecidos.add(proximo_nodo)
+            elif proximo_nodo.estado not in self.conhecidos:
+                self.conhecidos.add(proximo_nodo.estado)
                 sucessores = proximo_nodo.get_sucessores()
                 for sucessor in sucessores:
                     if sucessor not in self.fronteira:
@@ -35,14 +36,25 @@ class BFS:
 
 
 if __name__ == "__main__":
-    grafo = BFS("1234_5678")
-    caminho = grafo.acha_objetivo()
+    estado = sys.argv[1]
+    grafo = BFS(estado)
+    try:
+        caminho = grafo.acha_objetivo()
+        movimentos = len(caminho) - 1
+        print(f"Solucao tem {movimentos} movimentos.")
+    except Exception as e:
+        pass
 
-    for nodo in caminho:
-        print(nodo.acao)
-        print("\n")
-        print(nodo)
-        print("-"*20)
+
+
+    # grafo = BFS("123456_78")
+    # caminho = grafo.acha_objetivo()
+    #
+    # for nodo in caminho:
+    #     print(nodo.acao)
+    #     print("\n")
+    #     print(nodo)
+    #     print("-"*20)
 
 
 

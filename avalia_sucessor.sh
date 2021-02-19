@@ -1,0 +1,1 @@
+python3 nodo.py sucessor $1

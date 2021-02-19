@@ -1,4 +1,5 @@
 FROM continuumio/miniconda3
-RUN conda install pytest
 WORKDIR /ia
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
 CMD bash

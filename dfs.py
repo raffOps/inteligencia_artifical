@@ -1,5 +1,3 @@
-from nodo import Nodo
-from collections import deque
 from bfs import BFS
 
 

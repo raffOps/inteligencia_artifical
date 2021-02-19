@@ -10,7 +10,7 @@ def estado_12345_678():
 
 def test_vai_pra_cima_012345_6(estado_12345_678):
     estado = estado_12345_678
-    proximo_estado = estado.faz_acao(Direcao.cima)
+    proximo_estado = estado.faz_acao(Direcao.acima)
     assert proximo_estado == Nodo("1_3425678")
 
 

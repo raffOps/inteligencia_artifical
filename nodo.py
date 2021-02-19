@@ -1,4 +1,5 @@
 from direcao import Direcao
+import sys
 
 
 class Nodo:
@@ -23,7 +24,7 @@ class Nodo:
         return self.estado.find("_")
 
     def get_proxima_posicao_vazio(self, acao):
-        if acao == Direcao.cima:
+        if acao == Direcao.acima:
             proxima_posicao = self.posicao_vazio - 3 if self.posicao_vazio > 2 else self.posicao_vazio
         elif acao == Direcao.abaixo:
             proxima_posicao = self.posicao_vazio + 3 if self.posicao_vazio < 6 else self.posicao_vazio
@@ -44,7 +45,9 @@ class Nodo:
         return nodo_filho
     
     def get_sucessores(self):
-        return [self.faz_acao(acao) for acao in Direcao]
+        sucessores = [self.faz_acao(acao) for acao in Direcao]
+        return [sucessor for sucessor in sucessores
+                if sucessor.estado != self.estado]
 
     def get_caminho(self):
         caminho = []
@@ -55,3 +58,31 @@ class Nodo:
                 return caminho[::-1]
             else:
                 nodo = nodo.estado_pai
+
+
+def avalia_sucessor(estado):
+    nodo = Nodo(estado)
+    sucessores = nodo.get_sucessores()
+    for sucessor in sucessores:
+        print(f"({sucessor.acao},{sucessor.estado})", end=" ")
+
+
+def avalia_expande(estado, custo):
+    nodo = Nodo(estado, custo_caminho=custo)
+    sucessores = nodo.get_sucessores()
+    for sucessor in sucessores:
+        print(f"({sucessor.acao},{sucessor.estado},{sucessor.custo_caminho},{sucessor.estado_pai.estado})", end=" ")
+
+
+if __name__ == "__main__":
+    funcao = sys.argv[1]
+    estado = sys.argv[2]
+    if funcao == "sucessor":
+        avalia_sucessor(estado)
+    elif funcao == "expande":
+        custo = int(sys.argv[3])
+        avalia_expande(estado, custo)
+
+##avalia_expande("2_3541687", 4)
+
+
