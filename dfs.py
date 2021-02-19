@@ -5,7 +5,7 @@ class DFS(BFS):
     def __init__(self, raiz: str, objetivo="12345678_"):
         super().__init__(raiz, objetivo)
 
-    def get_proximo_nodo(self):
+    def pop_nodo_fronteira(self):
         return self.fronteira.pop()
 
 

@@ -13,12 +13,15 @@ class BFS:
     def inicia_fronteira(self):
         return deque([self.nodo_raiz])
 
-    def get_proximo_nodo(self):
+    def pop_nodo_fronteira(self):
         return self.fronteira.popleft()
+
+    def push_nodo_fronteira(self, sucessor):
+        self.fronteira.append(sucessor)
 
     def acha_objetivo(self):
         while True:
-            proximo_nodo = self.get_proximo_nodo()
+            proximo_nodo = self.pop_nodo_fronteira()
             #print(proximo_nodo.acao)
             #print(proximo_nodo)
             #print("*"*20)
@@ -32,7 +35,7 @@ class BFS:
                 sucessores = proximo_nodo.get_sucessores()
                 for sucessor in sucessores:
                     if sucessor not in self.fronteira:
-                        self.fronteira.append(sucessor)
+                        self.push_nodo_fronteira(sucessor)
 
 
 if __name__ == "__main__":
