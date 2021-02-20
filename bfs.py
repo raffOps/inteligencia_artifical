@@ -22,10 +22,6 @@ class BFS:
     def acha_objetivo(self):
         while True:
             proximo_nodo = self.pop_nodo_fronteira()
-            #print(proximo_nodo.acao)
-            #print(proximo_nodo)
-            #print("*"*20)
-            #input()
             if not proximo_nodo:
                 raise Exception("Nao existe caminho")
             elif proximo_nodo == self.objetivo:
@@ -34,8 +30,11 @@ class BFS:
                 self.conhecidos.add(proximo_nodo.estado)
                 sucessores = proximo_nodo.get_sucessores()
                 for sucessor in sucessores:
-                    if sucessor not in self.fronteira:
+                    if self.estah_sucessor_na_fronteira(sucessor):
                         self.push_nodo_fronteira(sucessor)
+
+    def estah_sucessor_na_fronteira(self, sucessor):
+        return sucessor not in self.fronteira
 
 
 if __name__ == "__main__":
