@@ -30,10 +30,10 @@ class BFS:
                 self.conhecidos.add(proximo_nodo.estado)
                 sucessores = proximo_nodo.get_sucessores()
                 for sucessor in sucessores:
-                    if self.estah_sucessor_na_fronteira(sucessor):
+                    if self.nao_estah_sucessor_na_fronteira(sucessor):
                         self.push_nodo_fronteira(sucessor)
 
-    def estah_sucessor_na_fronteira(self, sucessor):
+    def nao_estah_sucessor_na_fronteira(self, sucessor):
         return sucessor not in self.fronteira
 
 

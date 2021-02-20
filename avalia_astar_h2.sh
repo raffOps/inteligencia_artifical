@@ -1,0 +1,1 @@
+python3 a_star_manhatam.py $1

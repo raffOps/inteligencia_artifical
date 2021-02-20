@@ -18,7 +18,7 @@ class Nodo:
         return self.estado == other.estado
 
     def __str__(self):
-        return """{}\t{}\t{}\n{}\t{}\t{}\n{}\t{}\t{}""".format(*self.estado)
+        return """{}{}{}{}{}{}{}{}{}""".format(*self.estado)
 
     def procura_vazio(self):
         return self.estado.find("_")
