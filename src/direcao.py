@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Direcao(Enum):
     acima = 0
     abaixo = 1

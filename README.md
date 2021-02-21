@@ -1,14 +1,18 @@
 # inteligencia_artifical
 Trabalhos realizados na disciplina de Inteligência Artificial
 
-# Criar imagem docker
-```make image``` 
+# Integrantes
+    Rodrigo Antônio Rezende Lusa
+    Cartão: 00216668
+    Turma B
 
-# Criar o container e executar o bash no modo interativo
-```make bash```
+    Nome: Rafael Júnior Ribeiro
+    Cartão: 00265830
+    Turma: A
 
-# Executar os testes
-```make test```
+
+# Configurar ambiente
+```pip3 install -r requirements.txt```
 
 
 

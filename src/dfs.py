@@ -1,5 +1,5 @@
-from bfs import BFS
-
+from src.bfs import BFS
+import sys
 
 class DFS(BFS):
     def __init__(self, raiz: str, objetivo="12345678_"):
@@ -10,21 +10,9 @@ class DFS(BFS):
 
 
 if __name__ == "__main__":
-    grafo = DFS("12345_678")
+    estado = sys.argv[1]
+    grafo = DFS(estado)
     caminho = grafo.acha_objetivo()
-
-    for nodo in caminho:
-        print(nodo.acao)
-        print("\n")
-        print(nodo)
-        print("-"*20)
-
-
-
-
-
-
-
-
-
-
+    if caminho:
+        if caminho:
+            print(' '.join([nodo.acao for nodo in caminho[1:]]))

@@ -1,6 +1,6 @@
 import pytest
-from nodo import Nodo
-from direcao import Direcao
+from src.nodo import Nodo
+from src.direcao import Direcao
 
 
 @pytest.fixture

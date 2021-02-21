@@ -1,1 +1,2 @@
-python3 a_star_manhatam.py $1
+#!/usr/bin/bash
+python3 src/a_star_manhatam.py $1

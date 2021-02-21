@@ -1,7 +1,6 @@
 import numpy as np
 
 from a_star_hamming import AStarHamming
-import heapq
 import sys
 
 
@@ -33,9 +32,6 @@ class AStarManhattan(AStarHamming):
 if __name__ == "__main__":
     estado = sys.argv[1]
     grafo = AStarManhattan(estado)
-    try:
-        caminho = grafo.acha_objetivo()
-        movimentos = len(caminho) - 1
-        print(f"Solucao tem {movimentos} movimentos.")
-    except Exception as e:
-        pass
+    caminho = grafo.acha_objetivo()
+    if caminho:
+        print(' '.join([nodo.acao for nodo in caminho[1:]]))

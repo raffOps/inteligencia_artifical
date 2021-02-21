@@ -1,1 +1,2 @@
-python3 bfs.py $1
+#!/usr/bin/bash
+python3 src/bfs.py $1
