@@ -1,4 +1,4 @@
-from src.bfs import BFS
+from bfs import BFS
 import sys
 
 class DFS(BFS):
@@ -13,6 +13,7 @@ if __name__ == "__main__":
     estado = sys.argv[1]
     grafo = DFS(estado)
     caminho = grafo.acha_objetivo()
+    print(len(grafo.conhecidos))
     if caminho:
         if caminho:
             print(' '.join([nodo.acao for nodo in caminho[1:]]))
