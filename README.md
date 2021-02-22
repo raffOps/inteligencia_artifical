@@ -1,17 +1,27 @@
 # inteligencia_artifical
 Trabalhos realizados na disciplina de Inteligência Artificial
 
-# Integrantes
-    Rodrigo Antônio Rezende Lusa
-    Cartão: 00216668
-    Turma B
+# Execução dos algoritmos para 2_3541687
 
-    Nome: Rafael Júnior Ribeiro
-    Cartão: 00265830
-    Turma: A
+    A* Manhatam
+        Nodos expandidos: 1757
+        Custo: 23
+
+    A* Hamming
+        Nodos expandidos: 90423
+        Custo: 23
+
+    DFS
+        Nodos expandidos: 38683
+        Custo: 36225
+
+    BFS
+        Nodos expandidos: 104693
+        Custo: 23
+    
 
 
-# Configurar ambiente
+# Ambiente
 ```pip3 install -r requirements.txt```
 
 
