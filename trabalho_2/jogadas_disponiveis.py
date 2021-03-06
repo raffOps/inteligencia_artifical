@@ -14,20 +14,19 @@ def get_localizacao_pecas(tabuleiro, jogador):
 
 
 def procura_jogada_direita(peca_jogador_x, peca_jogador_y, oponente, tabuleiro):
-    pecas_do_oponentes_possiveis_de_serem_capturadas = []
+    pecas_capturadas = []
     posicao_vazio = None
     for posicao_coluna_a_direita in range(peca_jogador_y+1, 8):
         if tabuleiro[peca_jogador_x, posicao_coluna_a_direita] == oponente:
-            pecas_do_oponentes_possiveis_de_serem_capturadas.append((peca_jogador_x, posicao_coluna_a_direita))
+            pecas_capturadas.append((peca_jogador_x, posicao_coluna_a_direita))
         elif tabuleiro[peca_jogador_x, posicao_coluna_a_direita] == ".":
             posicao_vazio = (peca_jogador_x, posicao_coluna_a_direita)
             break
-    if pecas_do_oponentes_possiveis_de_serem_capturadas and posicao_vazio:
-        return posicao_vazio, pecas_do_oponentes_possiveis_de_serem_capturadas
+    return posicao_vazio, pecas_capturadas
 
 
 def procura_jogada_diagonal_45(peca_jogador_x, peca_jogador_y, oponente, tabuleiro):
-    pecas_do_oponentes_possiveis_de_serem_capturadas = []
+    pecas_capturadas = []
     posicao_vazio = None
     linha, coluna = peca_jogador_x, peca_jogador_y
     while True:
@@ -39,27 +38,25 @@ def procura_jogada_diagonal_45(peca_jogador_x, peca_jogador_y, oponente, tabulei
             posicao_vazio = (linha, coluna)
             break
         elif tabuleiro[linha, coluna] == oponente:
-            pecas_do_oponentes_possiveis_de_serem_capturadas.append((linha, coluna))
+            pecas_capturadas.append((linha, coluna))
 
-    if pecas_do_oponentes_possiveis_de_serem_capturadas and posicao_vazio:
-        return posicao_vazio, pecas_do_oponentes_possiveis_de_serem_capturadas
+    return posicao_vazio, pecas_capturadas
 
 
 def procura_jogada_cima(peca_jogador_x, peca_jogador_y, oponente, tabuleiro):
-    pecas_do_oponentes_possiveis_de_serem_capturadas = []
+    pecas_capturadas = []
     posicao_vazio = None
     for posicao_linha_em_cima in range(peca_jogador_x - 1, 0, -1):
         if tabuleiro[posicao_linha_em_cima, peca_jogador_y] == oponente:
-            pecas_do_oponentes_possiveis_de_serem_capturadas.append((posicao_linha_em_cima, peca_jogador_y))
+            pecas_capturadas.append((posicao_linha_em_cima, peca_jogador_y))
         elif tabuleiro[posicao_linha_em_cima, peca_jogador_y] == ".":
             posicao_vazio = (posicao_linha_em_cima, peca_jogador_y)
             break
-    if pecas_do_oponentes_possiveis_de_serem_capturadas and posicao_vazio:
-        return posicao_vazio, pecas_do_oponentes_possiveis_de_serem_capturadas
+    return posicao_vazio, pecas_capturadas
 
 
 def procura_jogada_diagonal_135(peca_jogador_x, peca_jogador_y, oponente, tabuleiro):
-    pecas_do_oponentes_possiveis_de_serem_capturadas = []
+    pecas_capturadas = []
     posicao_vazio = None
     linha, coluna = peca_jogador_x, peca_jogador_y
     while True:
@@ -71,26 +68,25 @@ def procura_jogada_diagonal_135(peca_jogador_x, peca_jogador_y, oponente, tabule
             posicao_vazio = (linha, coluna)
             break
         elif tabuleiro[linha, coluna] == oponente:
-            pecas_do_oponentes_possiveis_de_serem_capturadas.append((linha, coluna))
+            pecas_capturadas.append((linha, coluna))
 
-    return posicao_vazio, pecas_do_oponentes_possiveis_de_serem_capturadas
+    return posicao_vazio, pecas_capturadas
 
 
 def procura_jogada_esquerda(peca_jogador_x, peca_jogador_y, oponente, tabuleiro):
-    pecas_do_oponentes_possiveis_de_serem_capturadas = []
+    pecas_capturadas = []
     posicao_vazio = None
     for posicao_coluna_a_esquerda in range(peca_jogador_y - 1, 0, -1):
         if tabuleiro[peca_jogador_x, posicao_coluna_a_esquerda] == oponente:
-            pecas_do_oponentes_possiveis_de_serem_capturadas.append((peca_jogador_x, posicao_coluna_a_esquerda))
+            pecas_capturadas.append((peca_jogador_x, posicao_coluna_a_esquerda))
         elif tabuleiro[peca_jogador_x, posicao_coluna_a_esquerda] == ".":
             posicao_vazio = (peca_jogador_x, posicao_coluna_a_esquerda)
             break
-    if pecas_do_oponentes_possiveis_de_serem_capturadas and posicao_vazio:
-        return posicao_vazio, pecas_do_oponentes_possiveis_de_serem_capturadas
+    return posicao_vazio, pecas_capturadas
 
 
 def procura_jogada_diagonal_225(peca_jogador_x, peca_jogador_y, oponente, tabuleiro):
-    pecas_do_oponentes_possiveis_de_serem_capturadas = []
+    pecas_capturadas = []
     posicao_vazio = None
     linha, coluna = peca_jogador_x, peca_jogador_y
     while True:
@@ -102,26 +98,26 @@ def procura_jogada_diagonal_225(peca_jogador_x, peca_jogador_y, oponente, tabule
             posicao_vazio = (linha, coluna)
             break
         elif tabuleiro[linha, coluna] == oponente:
-            pecas_do_oponentes_possiveis_de_serem_capturadas.append((linha, coluna))
+            pecas_capturadas.append((linha, coluna))
 
-    if pecas_do_oponentes_possiveis_de_serem_capturadas and posicao_vazio:
-        return posicao_vazio, pecas_do_oponentes_possiveis_de_serem_capturadas
+    return posicao_vazio, pecas_capturadas
 
 
 def procura_jogada_baixo(peca_jogador_x, peca_jogador_y, oponente, tabuleiro):
-    pecas_do_oponentes_possiveis_de_serem_capturadas = []
+    pecas_capturadas = []
     posicao_vazio = None
     for posicao_linha_em_baixo in range(peca_jogador_x + 1, 8):
         if tabuleiro[posicao_linha_em_baixo, peca_jogador_y] == oponente:
-            pecas_do_oponentes_possiveis_de_serem_capturadas.append((posicao_linha_em_baixo, peca_jogador_y))
+            pecas_capturadas.append((posicao_linha_em_baixo, peca_jogador_y))
         elif tabuleiro[posicao_linha_em_baixo, peca_jogador_y] == ".":
             posicao_vazio = (posicao_linha_em_baixo, peca_jogador_y)
             break
-    if pecas_do_oponentes_possiveis_de_serem_capturadas and posicao_vazio:
-        return posicao_vazio, pecas_do_oponentes_possiveis_de_serem_capturadas
+
+    return posicao_vazio, pecas_capturadas
+
 
 def procura_jogada_diagonal_315(peca_jogador_x, peca_jogador_y, oponente, tabuleiro):
-    pecas_do_oponentes_possiveis_de_serem_capturadas = []
+    pecas_capturadas = []
     posicao_vazio = None
     linha, coluna = peca_jogador_x, peca_jogador_y
     while True:
@@ -133,28 +129,43 @@ def procura_jogada_diagonal_315(peca_jogador_x, peca_jogador_y, oponente, tabule
             posicao_vazio = (linha, coluna)
             break
         elif tabuleiro[linha, coluna] == oponente:
-            pecas_do_oponentes_possiveis_de_serem_capturadas.append((linha, coluna))
+            pecas_capturadas.append((linha, coluna))
 
-    if pecas_do_oponentes_possiveis_de_serem_capturadas and posicao_vazio:
-        return posicao_vazio, pecas_do_oponentes_possiveis_de_serem_capturadas
+    return posicao_vazio, pecas_capturadas
 
 
 def get_jogadas_disponiveis(tabuleiro, jogador):
     oponente = "W" if jogador == "B" else "B"
     localizacao_pecas_jogador = get_localizacao_pecas(tabuleiro, jogador)
-    jogadas_disponiveis = {}
+    jogadas_disponiveis = []
     for peca_jogador_x, peca_jogador_y in localizacao_pecas_jogador:
-        jogadas_disponiveis[(peca_jogador_x, peca_jogador_y)] = []
         direcao = [procura_jogada_direita, procura_jogada_diagonal_45,
                    procura_jogada_cima, procura_jogada_diagonal_135,
                    procura_jogada_esquerda, procura_jogada_diagonal_225,
                    procura_jogada_baixo, procura_jogada_diagonal_315]
         for procura in direcao:
-            jogadas = procura(peca_jogador_x, peca_jogador_y, oponente, tabuleiro)
-            if jogadas:
-                jogadas_disponiveis[(peca_jogador_x, peca_jogador_y)].append(jogadas)
+            posicao_vazio, pecas_do_oponente_capturadas = procura(peca_jogador_x, peca_jogador_y,
+                                                                                       oponente, tabuleiro)
+            if posicao_vazio and pecas_do_oponente_capturadas:
+                posicoes_capturadas = pecas_do_oponente_capturadas
+                posicoes_capturadas.append(posicao_vazio)
+                jogadas_disponiveis.append((posicao_vazio, pecas_do_oponente_capturadas))
 
     return jogadas_disponiveis
 
-tabuleiro = get_tabuleiro()
-get_jogadas_disponiveis(tabuleiro, "B")
+
+def get_heuristica(posicoes_capturadas):
+    heuristica = 0
+    for posicao_x, posicao_y in posicoes_capturadas:
+        if posicao_x in [0, 7] or posicao_y in [0, 7]:
+            heuristica += 10
+        else:
+            heuristica += 1
+    return heuristica
+
+# tabuleiro = get_tabuleiro()
+# jogadas_disponiveis = get_jogadas_disponiveis(tabuleiro, "B")
+# jogadas_disponiveis_com_heuristica = [(jogada, posicoes_capturadas, get_heuristica(posicoes_capturadas))
+#                                       for (jogada, posicoes_capturadas) in jogadas_disponiveis]
+#
+# print(jogadas_disponiveis_com_heuristica)
