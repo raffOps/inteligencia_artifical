@@ -57,7 +57,7 @@ class Board(object):
         that are initialized according to othello's initial board
         :return:
         """
-        self.tiles = [[self.EMPTY] * 8 for i in range(8)]
+        self.tiles = [[self.EMPTY] * 8 for _ in range(8)]
 
         self.tiles[3][3], self.tiles[3][4] = self.WHITE, self.BLACK
         self.tiles[4][3], self.tiles[4][4] = self.BLACK, self.WHITE
@@ -103,18 +103,16 @@ class Board(object):
 
         opp = self.BLACK if color == self.WHITE else self.WHITE  # inline opponent calc.
 
-        if not (0 <= tx <= 7 and 0 <= ty <= 7) or self.tiles[tx][ty] != opp:
+        if not 0 <= tx <= 7 or not 0 <= ty <= 7 or self.tiles[tx][ty] != opp:
             return False
 
         while self.tiles[tx][ty] == opp:  # putting is_within_bounds here yields more calls
             tx += dx
             ty += dy
-            if not (0 <= tx <= 7 and 0 <= ty <= 7):  # self.is_within_bounds((tx, ty)):
+            if not 0 <= tx <= 7 or not 0 <= ty <= 7:  # self.is_within_bounds((tx, ty)):
                 return False
 
-        if self.tiles[tx][ty] == self.EMPTY:
-            return False
-        return tx, ty
+        return False if self.tiles[tx][ty] == self.EMPTY else (tx, ty)
 
     def find_where_to_play_from_owned(self, owned, color, direction):
         """
@@ -135,18 +133,16 @@ class Board(object):
         ty += dy
         opp = self.BLACK if color == self.WHITE else self.WHITE  # inline opponent calc.
 
-        if not (0 <= tx <= 7 and 0 <= ty <= 7) or self.tiles[tx][ty] != opp:  # color:
+        if not 0 <= tx <= 7 or not 0 <= ty <= 7 or self.tiles[tx][ty] != opp:  # color:
             return False
 
         while self.tiles[tx][ty] == opp:
             tx += dx
             ty += dy
-            if not (0 <= tx <= 7 and 0 <= ty <= 7):
+            if not 0 <= tx <= 7 or not 0 <= ty <= 7:
                 return False
 
-        if self.tiles[tx][ty] != self.EMPTY:
-            return False
-        return tx, ty
+        return False if self.tiles[tx][ty] != self.EMPTY else (tx, ty)
 
     def process_move(self, position, color):
         """
@@ -254,8 +250,9 @@ class Board(object):
         for x, y in tiles:
             if self.tiles[x][y] == color:
                 for direc in self.DIRECTIONS:
-                    move = self.find_where_to_play_from_owned((x, y), color, direc)
-                    if move:
+                    if move := self.find_where_to_play_from_owned(
+                        (x, y), color, direc
+                    ):
                         # flips x,y because of the way tiles are stored and the x,y coords in real world
                         self._legal_moves[color].append((move[1], move[0]))
 
@@ -286,10 +283,7 @@ class Board(object):
         if color == self.EMPTY:
             raise ValueError('Empty has no opponent.')
 
-        if color == self.WHITE:
-            return self.BLACK
-        else:
-            return self.WHITE
+        return self.BLACK if color == self.WHITE else self.WHITE
 
     def print_board(self):
         """
@@ -316,8 +310,4 @@ class Board(object):
         Returns the string representation of the board
         :return: str
         """
-        string = ''
-        for i, row in enumerate(self.tiles):
-            string += '%s\n' % ''.join(row)
-
-        return string
+        return ''.join('%s\n' % ''.join(row) for row in self.tiles)

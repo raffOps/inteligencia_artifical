@@ -12,7 +12,7 @@ class Otelo:
 
     def get_tabuleiro(self, tabuleiro_nome):
         with open(tabuleiro_nome) as file:
-            tabuleiro = [[char for char in file.readline()[:-1]] for _ in range(8)]
+            tabuleiro = [list(file.readline()[:-1]) for _ in range(8)]
             tabuleiro = np.array(tabuleiro).reshape(8, 8)
             return tabuleiro
 
@@ -25,22 +25,21 @@ class Otelo:
     def max(self, tabuleiro_inicial, jogada, jogador, profundidade, profundidade_maxima, alfa, beta):
         if profundidade > profundidade_maxima:
             return self.get_heuristica(tabuleiro_inicial), jogada
-        else:
-            jogadas_disponiveis = get_jogadas_disponiveis(tabuleiro_inicial, jogador)
-            melhor_jogada = None
-            for jogada, posicoes_capturadas, in jogadas_disponiveis:
-                tabuleiro = deepcopy(tabuleiro_inicial)
-                for peca in posicoes_capturadas:
-                    tabuleiro[peca[0], peca[1]] = jogador
-                oponente = "W" if jogador == "B" else "B"
-                utilidade, jogada = self.min(tabuleiro, oponente, profundidade, profundidade_maxima, alfa, beta)
-                if utilidade > alfa:
-                    alfa = utilidade
-                    melhor_jogada = jogada
-                if beta < alfa:
-                    return alfa, melhor_jogada
+        jogadas_disponiveis = get_jogadas_disponiveis(tabuleiro_inicial, jogador)
+        melhor_jogada = None
+        for jogada, posicoes_capturadas, in jogadas_disponiveis:
+            tabuleiro = deepcopy(tabuleiro_inicial)
+            for peca in posicoes_capturadas:
+                tabuleiro[peca[0], peca[1]] = jogador
+            oponente = "W" if jogador == "B" else "B"
+            utilidade, jogada = self.min(tabuleiro, oponente, profundidade, profundidade_maxima, alfa, beta)
+            if utilidade > alfa:
+                alfa = utilidade
+                melhor_jogada = jogada
+            if beta < alfa:
+                return alfa, melhor_jogada
 
-            return alfa, melhor_jogada
+        return alfa, melhor_jogada
 
     def min(self, tabuleiro_inicial, jogador, profundidade, profundidade_maxima, alfa, beta):
         jogadas_disponiveis = get_jogadas_disponiveis(tabuleiro_inicial, jogador)
@@ -60,14 +59,11 @@ class Otelo:
         return beta, pior_jogada
 
     def get_heuristica(self, tabuleiro):
-        heuristica = 0
         posicoes_capturadas = get_localizacao_pecas(tabuleiro, self.jogador)
-        for posicao_x, posicao_y in posicoes_capturadas:
-            if posicao_x in [0, 7] or posicao_y in [0, 7]:
-                heuristica += 10
-            else:
-                heuristica += 1
-        return heuristica
+        return sum(
+            10 if posicao_x in [0, 7] or posicao_y in [0, 7] else 1
+            for posicao_x, posicao_y in posicoes_capturadas
+        )
 
 
 

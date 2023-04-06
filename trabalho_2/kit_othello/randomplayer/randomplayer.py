@@ -17,6 +17,5 @@ def make_move(the_board, color):
 
 if __name__ == '__main__':
     b = board.from_file(sys.argv[1])
-    f = open('move.txt', 'w')
-    f.write('%d,%d' % make_move(b, sys.argv[2]))
-    f.close()
+    with open('move.txt', 'w') as f:
+        f.write('%d,%d' % make_move(b, sys.argv[2]))

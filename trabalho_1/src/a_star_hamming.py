@@ -9,8 +9,7 @@ class AStarHamming(BFS):
         self.indice = 0
 
     def inicia_fronteira(self):
-        fronteira = [(0, self.nodo_raiz)]
-        return fronteira
+        return [(0, self.nodo_raiz)]
 
     def push_nodo_fronteira(self, sucessor):
         heuristica = self.get_heuristica(sucessor)
@@ -21,10 +20,7 @@ class AStarHamming(BFS):
         return heapq.heappop(self.fronteira)[-1]
 
     def nao_estah_sucessor_na_fronteira(self, sucessor):
-        for *_, nodo in self.fronteira:
-            if nodo == sucessor:
-                return False
-        return True
+        return all(nodo != sucessor for *_, nodo in self.fronteira)
 
     def get_heuristica(self, sucessor):
         objetivo = "185432_67"
@@ -34,6 +30,5 @@ class AStarHamming(BFS):
 if __name__ == "__main__":
     estado = sys.argv[1]
     grafo = AStarHamming(estado)
-    caminho = grafo.acha_objetivo()
-    if caminho:
+    if caminho := grafo.acha_objetivo():
         print(' '.join([nodo.acao for nodo in caminho[1:]]))

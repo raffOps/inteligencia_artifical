@@ -63,8 +63,8 @@ class Server(object):
             no_moves_opponent = len(self.board.legal_moves(self.board.opponent(self.player_color[player]))) == 0
 
             # calculates scores
-            p1_score = sum([1 for char in str(self.board) if char == self.board.BLACK])
-            p2_score = sum([1 for char in str(self.board) if char == self.board.WHITE])
+            p1_score = sum(1 for char in str(self.board) if char == self.board.BLACK)
+            p2_score = sum(1 for char in str(self.board) if char == self.board.WHITE)
 
             # disqualify player if he attempts illegal moves 5 times in a row
             if illegal_count[player] >= 5:
@@ -107,11 +107,8 @@ class Server(object):
 
             # puts file in player dir
             path_to_state = self.STATE_FILE
-            state_file = open(path_to_state, 'w')
-
-            state_file.write(str(self.board))
-            state_file.close()
-
+            with open(path_to_state, 'w') as state_file:
+                state_file.write(str(self.board))
             # starts player process
             stdout = open(self.redir_stdout, 'a') if self.redir_stdout is not None else sys.stdout
             player_process = subprocess.Popen(
@@ -202,9 +199,8 @@ class Server(object):
         ugly_xml = ET.tostring(root).decode('utf-8')
         dom = xml.dom.minidom.parseString(ugly_xml)  # or xml.dom.minidom.parseString(xml_string)
         pretty_xml = dom.toprettyxml()
-        f = open(self.output_file, 'w')
-        f.write(pretty_xml)
-        f.close()
+        with open(self.output_file, 'w') as f:
+            f.write(pretty_xml)
 
 
 if __name__ == '__main__':

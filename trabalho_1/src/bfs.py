@@ -30,25 +30,21 @@ class BFS:
                         elemento2 = int(raiz[indice_2])
                         if elemento1 < elemento2:
                             inversoes_totais += 1
-        if inversoes_totais % 2 == 0:
-            return True
-        else:
-            return False
+        return inversoes_totais % 2 == 0
 
     def acha_objetivo(self):
-        if self.existe_caminho():
-            while True:
-                proximo_nodo = self.pop_nodo_fronteira()
-                if proximo_nodo == self.objetivo:
-                    return proximo_nodo.get_caminho()
-                elif proximo_nodo.estado not in self.conhecidos:
-                    self.conhecidos.add(proximo_nodo.estado)
-                    sucessores = proximo_nodo.get_sucessores()
-                    for sucessor in sucessores:
-                        if self.nao_estah_sucessor_na_fronteira(sucessor):
-                            self.push_nodo_fronteira(sucessor)
-        else:
+        if not self.existe_caminho():
             return []
+        while True:
+            proximo_nodo = self.pop_nodo_fronteira()
+            if proximo_nodo == self.objetivo:
+                return proximo_nodo.get_caminho()
+            elif proximo_nodo.estado not in self.conhecidos:
+                self.conhecidos.add(proximo_nodo.estado)
+                sucessores = proximo_nodo.get_sucessores()
+                for sucessor in sucessores:
+                    if self.nao_estah_sucessor_na_fronteira(sucessor):
+                        self.push_nodo_fronteira(sucessor)
 
     def nao_estah_sucessor_na_fronteira(self, sucessor):
         return sucessor not in self.fronteira
@@ -57,6 +53,5 @@ class BFS:
 if __name__ == "__main__":
     estado = sys.argv[1]
     grafo = BFS(estado)
-    caminho = grafo.acha_objetivo()
-    if caminho:
+    if caminho := grafo.acha_objetivo():
         print(' '.join([nodo.acao for nodo in caminho[1:]]))

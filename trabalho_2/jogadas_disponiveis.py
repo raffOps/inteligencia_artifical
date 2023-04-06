@@ -3,7 +3,7 @@ import numpy as np
 
 def get_tabuleiro():
     with open("arquivo_estado_tabuleiro") as file:
-        tabuleiro = [[char for char in file.readline()[:-1]] for _ in range(8)]
+        tabuleiro = [list(file.readline()[:-1]) for _ in range(8)]
         tabuleiro = np.array(tabuleiro).reshape(8, 8)
         return tabuleiro
 
@@ -155,13 +155,10 @@ def get_jogadas_disponiveis(tabuleiro, jogador):
 
 
 def get_heuristica(posicoes_capturadas):
-    heuristica = 0
-    for posicao_x, posicao_y in posicoes_capturadas:
-        if posicao_x in [0, 7] or posicao_y in [0, 7]:
-            heuristica += 10
-        else:
-            heuristica += 1
-    return heuristica
+    return sum(
+        10 if posicao_x in [0, 7] or posicao_y in [0, 7] else 1
+        for posicao_x, posicao_y in posicoes_capturadas
+    )
 
 # tabuleiro = get_tabuleiro()
 # jogadas_disponiveis = get_jogadas_disponiveis(tabuleiro, "B")

@@ -32,6 +32,5 @@ class AStarManhattan(AStarHamming):
 if __name__ == "__main__":
     estado = sys.argv[1]
     grafo = AStarManhattan(estado)
-    caminho = grafo.acha_objetivo()
-    if caminho:
+    if caminho := grafo.acha_objetivo():
         print(' '.join([nodo.acao for nodo in caminho[1:]]))
